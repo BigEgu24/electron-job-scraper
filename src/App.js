@@ -1,23 +1,36 @@
-import logo from './logo.svg';
+import {useEffect, useState} from "react";
 import './App.css';
+let { ipcRenderer } = window.require("electron");
 
 function App() {
+  const [jobs, setJobs] = useState([])
+  useEffect(() => {
+    ipcRenderer.on("child", (event, jobListing) => {
+      setJobs(jobListing)
+    })
+  }, [])
+  console.log(jobs)
+  const scrapJobs = () => {
+    ipcRenderer.send('child', 'Full Stack Developer')
+  }
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button style={{ cursor: 'pointer' }} onClick={() => scrapJobs()}>
+        Click Me!
+      </button>
+      {
+        jobs.map((job, index) => {
+          return(
+          <div key={index}>
+            <h3>
+              {job.role}
+            </h3>
+            <br />
+          </div>
+          )
+        })
+      }
     </div>
   );
 }
