@@ -8,7 +8,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .  --trace-warnings\"",
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds"
   },
   "dependencies": {
@@ -16,11 +16,19 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "concurrently": "^6.1.0",
+    "electron-chromedriver": "^9.0.0",
+    "node-sass": "^6.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
+    "selenium-webdriver": "^4.0.0-alpha.4",
     "wait-on": "^5.3.0",
     "web-vitals": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/selenium-webdriver": "^4.0.2",
+    "electron": "^9.4.0",
+    "electron-packager": "^14.0.5"
   },
   "eslintConfig": {
     "extends": [
@@ -39,9 +47,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "electron": "^12.0.7",
-    "electron-packager": "^15.2.0"
   }
 }
